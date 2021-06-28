@@ -82,6 +82,14 @@ def post_save_create_slug(sender,instance,created,*args,**kwargs):
         instance.slug=slugify(instance.title)
         instance.save()   
 
+@receiver(pre_delete,sender=BlogPost)
+def pre_delete_signal(sender,instance,*args,**kwargs):
+    print("before delete into database")     
+
+@receiver(post_delete,sender=BlogPost)
+def post_delete_signal(sender,instance,*args,**kwargs):
+    print("after delete into database")      
+
 
       
 
