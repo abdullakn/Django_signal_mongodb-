@@ -69,3 +69,19 @@ def post_save_reciever(sender,instance,created,*args,**kwargs):
 # post_save.connect(user_created_model,sender=User)
 
 
+
+@receiver(pre_save,sender=BlogPost)
+def pre_save_create(sender,instance,*args,**kwargs):
+    print("before saving to database")       
+
+
+
+@receiver(post_save,sender=BlogPost)
+def post_save_create_slug(sender,instance,created,*args,**kwargs):
+    if not instance.slug:
+        instance.slug=slugify(instance.title)
+        instance.save()   
+
+
+      
+
